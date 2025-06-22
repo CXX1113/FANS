@@ -1,0 +1,16 @@
+fashionmnist:
+  init_method: 'ones'
+  lr_pns: 0.001 # 0.001
+  epoch_pns: 50  # 100
+  perturb_size: 15
+  resample_size: 1
+  coef_scale_nec: 10.
+  coef_scale_suf: 2.
+  temp_params: [1., 0.001]  # initial and final temperatures
+  tv_coeff: 0.2
+  tv_beta: 3
+  l1_coeff: 0.1  # 0.1
+  perturb_func: 'mask'
+  scale: 1.  # 0: 0.1233
+  norm: 2100.  # 3500
+  weight_decay: 0.1
