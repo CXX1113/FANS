@@ -12,10 +12,7 @@ def create_dir_if_necessary(dir_path):
 curr_dir = os.path.dirname(os.path.abspath(__file__))
 
 
-HOSTNAME = socket.gethostname()
-
-root_dir_ = {'HP-Z66': "E:/ThirdResearch/data",}
-root_dir = root_dir_[HOSTNAME]
+root_dir = ''  # Please write down your data directory, e.g., '/home/data/'
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Using Device={device.__str__().upper()}")
