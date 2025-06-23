@@ -106,7 +106,7 @@ class FANS(nn.Module):
 
         self.feature_is_continuous = feature_is_continuous
         self.prediction_is_continuous = prediction_is_continuous
-        self.feat_bandwidths = nn.Parameter(feat_bandwidths)
+        self.feat_bandwidths = feat_bandwidths  # nn.Parameter(feat_bandwidths)
         self.class_bandwidths = class_bandwidths
 
         self.target_class = None
@@ -214,9 +214,7 @@ class FANS(nn.Module):
 
                 loss_i = torch.mean(diff_size)
 
-                threshold = 1e-4
-                is_close_to_zero = diff_size < threshold
-                num_success = is_close_to_zero.count_nonzero().item()
+                num_success = -1
 
             elif module_name == 'suf':
                 one_hot_label = torch.eye(len(logits[0]))[target_class].unsqueeze(0).to(device)
@@ -226,7 +224,7 @@ class FANS(nn.Module):
 
                 raw_loss = torch.clamp(i - j, min=0)  # (1,)
 
-                num_success = raw_loss.numel() - raw_loss.count_nonzero()
+                num_success = -1
 
                 raw_loss = 1 - torch.exp(-raw_loss)
 
@@ -257,7 +255,8 @@ class FANS(nn.Module):
 
         # Nec module
         # Factual step
-        selction_results = self.selector(self.feat_bandwidths.detach(), sample_data, inv=False, mask_temp=mask_temp)
+        # selction_results = self.selector(self.feat_bandwidths.detach(), sample_data, inv=False, mask_temp=mask_temp)
+        selction_results = self.selector(self.feat_bandwidths, sample_data, inv=False, mask_temp=mask_temp)
         perturbed_ys_onehot = get_perturb_prediction(model, sample_data, selction_results, y_type='y_onehot',
                                                      perturb_func_name=self.perturb_func_name)
 
