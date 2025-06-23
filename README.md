@@ -11,7 +11,7 @@ This is a PyTorch implementation of paper:
 Xuexin Chen, Ruichu Cai, Zhengting Huang, Yuxuan Zhu, Julien Horwood, Zhifeng Hao, Zijian Li, Jose Miguel Hernandez-Lobato
 
 ### How to run our code
-run the following scripts: ./main.py 
+run the following script: ./main.py 
 
 
 # Citation
